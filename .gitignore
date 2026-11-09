@@ -1,0 +1,11 @@
+# Local MSVC build and downloaded dependency stack
+Ardour-9.7.0/build-msvc-*/
+Ardour-9.7.0/build-msvc/
+depstack/
+.xg/
+.xmake/
+.xmake-global/
+
+# Generated Windows installer payloads
+.package-stage/
+release/
