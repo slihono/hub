@@ -18,7 +18,11 @@
  */
 
 #include <cstdlib>
+#if defined(COMPILER_MSVC)
+#include "pbd/msvc/getopt.h"
+#else
 #include <getopt.h>
+#endif
 #include <iostream>
 
 #ifndef PLATFORM_WINDOWS

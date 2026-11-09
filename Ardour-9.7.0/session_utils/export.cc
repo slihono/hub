@@ -18,7 +18,11 @@
 
 #include <iostream>
 #include <cstdlib>
+#if defined(COMPILER_MSVC)
+#include "pbd/msvc/getopt.h"
+#else
 #include <getopt.h>
+#endif
 #include <glibmm.h>
 
 #include "common.h"

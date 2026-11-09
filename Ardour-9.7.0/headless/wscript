@@ -56,7 +56,8 @@ def build(bld):
             obj.linkflags += bld.env['compiler_flags_dict']['mwindows']
 
         if bld.env['build_target'] == 'msvc':
-            obj.lib = ['getopt']
+            obj.use += ['getopt']
+        obj.defines += ['GETOPT_API=']
 
     obj.includes += ['../libs']
 

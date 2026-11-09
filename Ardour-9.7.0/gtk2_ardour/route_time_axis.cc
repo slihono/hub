@@ -1961,7 +1961,7 @@ RouteTimeAxisView::add_processor_automation_curve (std::shared_ptr<Processor> pr
 	add_automation_child (control->parameter(), pan->view, pan->view->marked_for_display ());
 
 	if (_view) {
-		_view->foreach_regionview (sigc::mem_fun(*pan->view.get(), &TimeAxisView::add_ghost));
+		_view->foreach_regionview (sigc::mem_fun (*pan->view, &TimeAxisView::add_ghost));
 	}
 }
 
@@ -2494,7 +2494,7 @@ RouteTimeAxisView::create_gain_automation_child (const Evoral::Parameter& param,
 						      _route->amp()->describe_parameter(param)));
 
 	if (_view) {
-		_view->foreach_regionview (sigc::mem_fun (*gain_track.get(), &TimeAxisView::add_ghost));
+		_view->foreach_regionview (sigc::mem_fun (*gain_track, &TimeAxisView::add_ghost));
 	}
 
 	add_automation_child (Evoral::Parameter(GainAutomation), gain_track, show);
@@ -2517,7 +2517,7 @@ RouteTimeAxisView::create_trim_automation_child (const Evoral::Parameter& param,
 						      _route->trim()->describe_parameter(param)));
 
 	if (_view) {
-		_view->foreach_regionview (sigc::mem_fun (*trim_track.get(), &TimeAxisView::add_ghost));
+		_view->foreach_regionview (sigc::mem_fun (*trim_track, &TimeAxisView::add_ghost));
 	}
 
 	add_automation_child (Evoral::Parameter(TrimAutomation), trim_track, show);
@@ -2541,7 +2541,7 @@ RouteTimeAxisView::create_mute_automation_child (const Evoral::Parameter& param,
 						      _route->describe_parameter(param)));
 
 	if (_view) {
-		_view->foreach_regionview (sigc::mem_fun (*mute_track.get(), &TimeAxisView::add_ghost));
+		_view->foreach_regionview (sigc::mem_fun (*mute_track, &TimeAxisView::add_ghost));
 	}
 
 	add_automation_child (Evoral::Parameter(MuteAutomation), mute_track, show);

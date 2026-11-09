@@ -18,7 +18,21 @@
 
 #include <cstdlib>
 #include <cstdio>
+#if defined(COMPILER_MSVC)
+#if defined(_POSIX_SOURCE)
+#undef _POSIX_SOURCE
+#define ARDOUR_RESTORE_POSIX_SOURCE
+#endif
+#undef GETOPT_API
+#define GETOPT_API
+#include "../pbd/msvc/getopt.h"
+#ifdef ARDOUR_RESTORE_POSIX_SOURCE
+#define _POSIX_SOURCE 1
+#undef ARDOUR_RESTORE_POSIX_SOURCE
+#endif
+#else
 #include <getopt.h>
+#endif
 #include <iostream>
 #include <string>
 

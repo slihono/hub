@@ -31,9 +31,6 @@
  * SUCH DAMAGE.
  */
 
-#ifdef COMPILER_MSVC
-#include "pbd/msvc_pbd.h"
-#endif
 #include "getopt.h"
 #include <stdio.h>
 #include <stdlib.h>

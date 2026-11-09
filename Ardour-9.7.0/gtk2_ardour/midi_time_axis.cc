@@ -28,6 +28,7 @@
 #include <cmath>
 
 #include <algorithm>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -1390,7 +1391,7 @@ MidiTimeAxisView::create_automation_child (const Evoral::Parameter& param, bool 
 			             _route->describe_parameter(param)));
 
 		if (_view) {
-			_view->foreach_regionview (sigc::mem_fun (*track.get(), &TimeAxisView::add_ghost));
+			_view->foreach_regionview (sigc::mem_fun (*track, &TimeAxisView::add_ghost));
 		}
 
 		add_automation_child (param, track, show);
@@ -1548,7 +1549,7 @@ void
 MidiTimeAxisView::get_per_region_note_selection (list<pair<PBD::ID, set<std::shared_ptr<Evoral::Note<Temporal::Beats> > > > >& selection)
 {
 	_view->foreach_regionview (
-		sigc::bind (sigc::mem_fun (*this, &MidiTimeAxisView::get_per_region_note_selection_region_view), sigc::ref(selection)));
+		sigc::bind (sigc::mem_fun (*this, &MidiTimeAxisView::get_per_region_note_selection_region_view), std::ref(selection)));
 }
 
 void
@@ -1827,7 +1828,7 @@ MidiTimeAxisView::create_velocity_automation_child (Evoral::Parameter const &, b
 	                                                  midi_track()->describe_parameter(c->parameter())));
 
 	if (_view) {
-		_view->foreach_regionview (sigc::mem_fun (*velocity_track.get(), &TimeAxisView::add_ghost));
+		_view->foreach_regionview (sigc::mem_fun (*velocity_track, &TimeAxisView::add_ghost));
 	}
 
 	add_automation_child (Evoral::Parameter(MidiVelocityAutomation), velocity_track, show);

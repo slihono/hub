@@ -147,6 +147,13 @@ def build(bld):
                          {'LIBPBD_VERSION' : LIBPBD_VERSION,
                           'LIBPBD_MAJOR_VERSION' : LIBPBD_MAJOR_VERSION})
 
+    # MSVC getopt compatibility library
+    if bld.env['build_target'] == 'msvc':
+        getopt = bld.stlib(features='c cstlib', source=['msvc/getopt.c', 'msvc/getopt_long.c'])
+        getopt.name = 'getopt'
+        getopt.target = 'getopt'
+        getopt.includes = ['.', '..']
+        getopt.defines = ['COMPILER_MSVC', 'PLATFORM_WINDOWS', 'GETOPT_API=']
     # Library
     if bld.is_defined ('INTERNAL_SHARED_LIBS'):
         obj              = bld.shlib(features = 'cxx cxxshlib', source=libpbd_sources)

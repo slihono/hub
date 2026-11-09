@@ -57,7 +57,8 @@ def build_ardour_util(bld, util):
         obj.linkflags += bld.env['compiler_flags_dict']['mconsole']
 
         if bld.env['build_target'] == 'msvc':
-            obj.lib = ['getopt']
+            obj.use += ['getopt']
+        obj.defines += ['GETOPT_API=']
 
     obj.includes += ['../libs']
 

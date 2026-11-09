@@ -70,13 +70,14 @@ def build(bld):
         elif bld.env['build_target'] == 'mingw' or bld.env['build_target'] == 'msvc':
             obj.linkflags += bld.env['compiler_flags_dict']['mwindows']
             if bld.env['build_target'] == 'msvc':
-                obj.lib = ['getopt']
+                obj.use += ['getopt']
 
         obj.includes  = [ '../pbd/', '../ardour/', '.' ]
         obj.defines = [
             '_POSIX_SOURCE',
             'USE_WS_PREFIX',
             'VST_SCANNER_APP',
+            'GETOPT_API=',
             'PACKAGE="' + I18N_PACKAGE + bld.env['MAJOR'] + '"',
             'LIBARDOUR="' + bld.env['lwrcase_dirname'] + '"',
             'VERSIONSTRING="' + bld.env['VERSION'] + '"',
